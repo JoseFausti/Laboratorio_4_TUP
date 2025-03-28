@@ -41,6 +41,6 @@ const guardarDatos = async () => {
     } catch (error) {
         console.error('Error al guardar los datos:', error);
     }
-
-    guardarDatos();
 }
+
+guardarDatos();
