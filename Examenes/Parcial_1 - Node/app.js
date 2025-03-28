@@ -3,11 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import obtenerDatos from './utils/functions/readline';
 
-const leerDatos = (name) => {
-    const data = JSON.parse(fs.readFileSync(`${path.dirname(__filename)}/${name}.json`, 'utf-8'));
-    console.log(data);
-}
-
 const argv = yargs
     .option('f', {
         alias: 'file',
@@ -16,6 +11,12 @@ const argv = yargs
     })
     .argv;
 
+
+
+const leerDatos = (name) => {
+    const data = JSON.parse(fs.readFileSync(`${path.dirname(__filename)}/${name}.json`, 'utf-8'));
+    console.log(data);
+}
 const guardarDatos = async () => {
     try {
         const {producto, precio, cantidad} = await obtenerDatos();
