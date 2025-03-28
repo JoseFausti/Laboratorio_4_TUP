@@ -1,0 +1,18 @@
+{
+  "name": "tp-npm",
+  "version": "1.0.0",
+  "description": "trabajo practico npm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Jose Fausti-C4",
+  "license": "ISC",
+  "dependencies": {
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "eslint": "^9.23.0"
+  }
+}

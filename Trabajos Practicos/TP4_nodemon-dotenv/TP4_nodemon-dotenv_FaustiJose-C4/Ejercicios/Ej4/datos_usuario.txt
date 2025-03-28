@@ -1,0 +1,4 @@
+Nombre: Jose
+Edad: 24
+Correo: jf@gmail.com
+
