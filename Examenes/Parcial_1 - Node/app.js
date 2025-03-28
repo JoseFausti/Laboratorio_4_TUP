@@ -4,9 +4,9 @@ import fs from 'fs';
 import path from 'path';
 import obtenerDatos from './utils/functions/readline.js';
 
-const argv = yargs(hideBin(process.argv));
+const argv = yargs(hideBin(process.argv))
 
-    argv.option('file', {
+    .option('file', {
         alias: 'f',
         type: 'string',
         description: 'Nombre del archivo JSON'
@@ -21,7 +21,8 @@ const leerDatos = (name) => {
 const guardarDatos = async () => {
     try {
         const {producto, precio, cantidad} = await obtenerDatos();
-        if (argv.file) {
+        const file = argv.file;
+        if (file) {
             if (fs.existsSync(`${argv.file}.json`)) {
                 const data = JSON.parse(fs.readFileSync(`${argv.file}.json`, 'utf-8'));
                 data.push({name: producto, precio, cantidad});
