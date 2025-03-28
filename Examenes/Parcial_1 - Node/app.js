@@ -1,41 +1,42 @@
 import yargs from 'yargs';
+import {hideBin} from 'yargs/helpers';
 import fs from 'fs';
 import path from 'path';
 import obtenerDatos from './utils/functions/readline.js';
 
-const argv = yargs
-    .option('f', {
-        alias: 'file',
+const argv = yargs(hideBin(process.argv));
+
+    argv.option('file', {
+        alias: 'f',
         type: 'string',
-        describe: 'Nombre del archivo'
-    })
-    .argv;
-
-
+        description: 'Nombre del archivo JSON'
+    }
+    )
+    .parse();
 
 const leerDatos = (name) => {
-    const data = JSON.parse(fs.readFileSync(`${path.dirname(__filename)}/${name}.json`, 'utf-8'));
+    const data = JSON.parse(fs.readFileSync(`${name}.json`, 'utf-8'));
     console.log(data);
 }
 const guardarDatos = async () => {
     try {
         const {producto, precio, cantidad} = await obtenerDatos();
         if (argv.file) {
-            if (fs.existsSync(`${path.dirname(__filename)}/${argv.file}.json`)) {
-                const data = JSON.parse(fs.readFileSync(`${path.dirname(__filename)}/${argv.file}.json`, 'utf-8'));
+            if (fs.existsSync(`${argv.file}.json`)) {
+                const data = JSON.parse(fs.readFileSync(`${argv.file}.json`, 'utf-8'));
                 data.push({name: producto, precio, cantidad});
-                fs.writeFileSync(`${path.dirname(__filename)}/${argv.file}.json`, JSON.stringify(data));
+                fs.writeFileSync(`${argv.file}.json`, JSON.stringify(data));
             } else {
-                fs.writeFileSync(`${path.dirname(__filename)}/${argv.file}.json`, JSON.stringify([{name: producto, precio, cantidad}]));
+                fs.writeFileSync(`${argv.file}.json`, JSON.stringify([{name: producto, precio, cantidad}]));
             }
             leerDatos(argv.file);
         }else{
-            if (fs.existsSync(`${path.dirname(__filename)}/productos.json`)) {
-                const data = JSON.parse(fs.readFileSync(`${path.dirname(__filename)}/productos.json`, 'utf-8'));
+            if (fs.existsSync(`productos.json`)) {
+                const data = JSON.parse(fs.readFileSync(`productos.json`, 'utf-8'));
                 data.push({name: producto, precio, cantidad});
-                fs.writeFileSync(`${path.dirname(__filename)}/productos.json`, JSON.stringify(data));
+                fs.writeFileSync(`productos.json`, JSON.stringify(data));
             } else {
-                fs.writeFileSync(`${path.dirname(__filename)}/productos.json`, JSON.stringify([{name: producto, precio, cantidad}])); 
+                fs.writeFileSync(`productos.json`, JSON.stringify([{name: producto, precio, cantidad}])); 
             }
             leerDatos('productos');
         }
