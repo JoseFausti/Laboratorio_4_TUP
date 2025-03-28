@@ -1,7 +1,7 @@
 import yargs from 'yargs';
 import fs from 'fs';
 import path from 'path';
-import obtenerDatos from './utils/functions/readline';
+import obtenerDatos from './utils/functions/readline.js';
 
 const argv = yargs
     .option('f', {
